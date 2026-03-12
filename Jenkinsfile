@@ -88,20 +88,5 @@ spec:
             }
         }
 
-        stage('Run Hadoop Job') {
-            steps {
-                container('gcloud-agent') {
-                    sh """
-                    gsutil -m rm -r gs://mayavi-dataproc-scripts/output || true
-                    gcloud dataproc jobs submit pyspark \
-                    --cluster=hadoop-cluster \
-                    --region=us-central1 \
-                    gs://mayavi-dataproc-scripts/hello_hadoop.py \
-                    -- gs://mayavi-dataproc-scripts/input \
-                        gs://mayavi-dataproc-scripts/output
-                    """
-                }
-            }
-        }
     }
 }
